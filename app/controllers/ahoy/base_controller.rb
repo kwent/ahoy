@@ -1,5 +1,5 @@
 module Ahoy
-  class BaseController < ApplicationController
+  class BaseController < ApiController
     filters = _process_action_callbacks.map(&:filter) - Ahoy.preserve_callbacks
     if Rails::VERSION::MAJOR >= 5
       skip_before_action(*filters, raise: false)
