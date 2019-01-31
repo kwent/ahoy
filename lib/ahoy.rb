@@ -63,7 +63,7 @@ module Ahoy
 
   mattr_accessor :user_method
   self.user_method = lambda do |controller|
-    (controller.respond_to?(:current_user) && controller.current_user) || (controller.respond_to?(:current_resource_owner, true) && controller.send(:current_resource_owner)) || nil
+    (controller.respond_to?(:current_user) && controller.current_user) || (controller.respond_to?(:current_resource_owner, true) && controller.send(:current_resource_owner)) || (controller.respond_to?(:authenticate_entity, true) && controller.send(:authenticate_entity, "user")) || nil
   end
 
   mattr_accessor :exclude_method
