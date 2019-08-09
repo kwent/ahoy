@@ -53,6 +53,7 @@ module Ahoy
             visit_token: visit_token,
             visitor_token: visitor_token,
             user_id: user.try(:id),
+            referrer_id: referrer.try(:id),
             started_at: trusted_time(started_at),
           }.merge(visit_properties).select { |_, v| v }
 
@@ -126,6 +127,10 @@ module Ahoy
 
     def user
       @user ||= @store.user
+    end
+
+    def referrer
+      @user ||= @store.referrer
     end
 
     def visit_properties

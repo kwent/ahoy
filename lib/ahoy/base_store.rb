@@ -31,6 +31,16 @@ module Ahoy
       end
     end
 
+    def referrer
+      @referrer ||= begin
+        if Ahoy.user_method.respond_to?(:call)
+          Ahoy.referrer_method.call(controller)
+        else
+          controller.send(Ahoy.referrer_method)
+        end
+      end
+    end
+
     def exclude?
       (!Ahoy.track_bots && bot?) || exclude_by_method?
     end

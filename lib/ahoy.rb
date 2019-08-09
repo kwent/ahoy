@@ -68,6 +68,11 @@ module Ahoy
     (controller.respond_to?(:current_user, true) && controller.send(:current_user)) || (controller.respond_to?(:current_resource_owner, true) && controller.send(:current_resource_owner)) || nil
   end
 
+  mattr_accessor :referrer_method
+  self.referrer_method = lambda do |controller|
+    (controller.respond_to?(:current_referrer) && controller.current_referrer) || (controller.respond_to?(:current_resource_owner, true) && controller.send(:current_resource_owner)) || (controller.respond_to?(:authenticate_entity, true)) || nil
+  end
+
   mattr_accessor :exclude_method
 
   mattr_accessor :track_bots
